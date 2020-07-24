@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IOrder } from '../models/IOrder';
+import { IOrderDetail } from '../models/IOrder';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class OrderService {
+    constructor(private http: HttpClient) {}
 
-  constructor (private http: HttpClient) { }
-
-  getOrder(): Observable<IOrder[]> {
-    return this.http.get<IOrder[]>('http://localhost:3000/order');
-  }
+    getOrder(): Observable<IOrderDetail[]> {
+        return this.http.get<IOrderDetail[]>('http://localhost:3000/order');
+    }
 }

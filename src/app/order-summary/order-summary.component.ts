@@ -1,40 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderSummaryService } from './order-summary.service';
-import { ShippingService } from './shipping.service';
-import { TaxService } from './tax.service';
-import { OrderService } from './order.service';
+import { IOrderDetail } from '../models/IOrder';
+import { IShipping } from '../models/IShipping';
+import { ITax } from '../models/ITax';
+import { IOrderSummary } from '../models/IOrderSummary';
 
 @Component({
     templateUrl: './order-summary.component.html',
 })
 export class OrderSummaryComponent implements OnInit {
-    order: any;
-    shipping: any;
-    tax: any;
-    orderDetailsTotalAmount = 0;
+    orderSummary: IOrderSummary;
 
-    constructor(private orderService: OrderService, private shippingService: ShippingService, private taxService: TaxService) {}
+    constructor(private orderSummaryService: OrderSummaryService) {}
 
     ngOnInit(): void {
-        this.orderService.getOrder().subscribe((order) => {
-            this.order = order;
-            let totalWeight = 0;
-            this.order.forEach((item) => {
-                this.orderDetailsTotalAmount += item.price * item.qty;
-                totalWeight += item.weight;
-            });
-            this.shippingService.getShipping(totalWeight).subscribe((shipping) => {
-                this.shipping = shipping;
-            });
+        this.orderSummaryService.getSummary().subscribe((orderSummary) => {
+            this.orderSummary = orderSummary;
         });
-
-        this.taxService.getTax().subscribe((tax) => {
-            this.tax = tax;
-        });
-    }
-
-    get orderTotal(): number {
-        return this.orderDetailsTotalAmount + this.orderDetailsTotalAmount * (this.tax.amount / 100) + this.shipping.cost;
     }
 
     /*
