@@ -18,8 +18,8 @@ export class OrderSummaryComponent implements OnInit {
     constructor(private orderService: OrderService, private shippingService: ShippingService, private taxService: TaxService) {}
 
     ngOnInit(): void {
-        this.orderService.getOrder().subscribe((order) => {
-            this.orderDetails = order;
+        this.orderService.getOrder().subscribe((orderDetails) => {
+            this.orderDetails = orderDetails;
             let totalWeight = 0;
             this.orderDetails.forEach((item) => {
                 this.orderDetailsTotalAmount += item.price * item.qty;
