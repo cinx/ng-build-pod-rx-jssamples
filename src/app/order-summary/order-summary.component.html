@@ -1,21 +1,11 @@
 <h2>Order</h2>
 
-<div>
-    {{ order | json }}
-</div>
+<div>orderDetails: {{ orderDetails | json }}</div>
 -----------------------------
-<div>
-    Order Details Total: {{ orderDetailsTotalAmount | currency}}
-</div>
+<div>Order Details Total: {{ orderDetailsTotalAmount | currency }}</div>
 -----------------------------
-<div>
-    {{ shipping | json }}
-</div>
+<div>Shipping: {{ shipping | json }}</div>
 -----------------------------
-<div>
-    {{ tax | json }}
-</div>
+<div>Tax: {{ tax?.amount | percent }}</div>
 -----------------------------
-<div *ngIf="order && shipping && tax">
-    Order Total: {{ orderTotal | currency }}
-</div>
+<div *ngIf="orderDetails && shipping && tax">Order Total: {{ orderTotal | currency }}</div>
