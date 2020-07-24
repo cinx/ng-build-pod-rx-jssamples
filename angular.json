@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ngBuildPodRxJSSamples"
+    }
+  },
+  "defaultProject": "ngBuildPodRxJSSamples",
+  "cli": {
+    "analytics": "6abb19c5-87f3-4b08-b94e-cfbce059e13e"
+  }
 }
